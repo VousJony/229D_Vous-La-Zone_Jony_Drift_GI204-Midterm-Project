@@ -8,17 +8,9 @@ public class ChangeColour : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        GetComponent<Renderer>().material.color = Color.red;
-        
-    }
-
-    void Start()
-    {
-        
-    }
-    
-    void Update()
-    {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GetComponent<Renderer>().material.color = Color.blue;
+        }
     }
 }
