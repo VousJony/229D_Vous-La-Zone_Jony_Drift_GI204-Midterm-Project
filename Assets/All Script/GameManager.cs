@@ -1,4 +1,3 @@
-// notice ... List class requires System.Collections.Generic namespace
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +10,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> targets;
 
     [Header("UI Elements")]
-    // NOTE: TextMeshProUGUI requires "using TMPro"
     public TextMeshProUGUI scoreText;
-    // NOTE: TextMeshProUGUI requires "using TMPro"
-    
+    public TextMeshProUGUI scoreTextSummay;
+
 
     public GameObject titleScreen;
     public GameObject gameOverScreen;
@@ -31,16 +29,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         playButton.onClick.AddListener(() => { PlayGame(); });
-
-        /*hardButton.onClick.AddListener(new UnityEngine.Events.UnityAction(hardButtonClicked));
-        mediuButton.onClick.AddListener(new UnityEngine.Events.UnityAction(hardButtonClicked));*/
+        restartButton.onClick.AddListener(() => { Restart(); });
+        creditButton.onClick.AddListener(() => { CreditShow(); });
+        
     }
-
-    /*    void hardButtonClicked()
-        {
-            StartGame(2);
-        }
-    */
     void Start()
     {
         gameOverScreen.SetActive(false);
@@ -63,8 +55,9 @@ public class GameManager : MonoBehaviour
     {
         this.score += score;
         scoreText.text = this.score.ToString();
+        scoreTextSummay.text = this.score.ToString();
     }
-    public void GameOver()
+    public void GameEnd()
     {
         Debug.Log("Jony End");
         gameOverScreen.SetActive(true);
@@ -81,6 +74,13 @@ public class GameManager : MonoBehaviour
     {
         titleScreen.SetActive(false);
         scoreScreen.SetActive(true);
+    }
+
+    public void CreditShow()
+    {
+        scoreScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
+        creditScreen.SetActive(true);
     }
 }
 
